@@ -41,7 +41,7 @@ class ForgiTools(object):
         coordinates = [[int(x) for x in line[2:]] for line in bg_result]
         return coordinates
 
-    def modified_distance(self, start, end):
+    def modified_distance(self, start, end, custom_factors = None):
         """ heuristic for a molecular distance between two nucleotides
         in a hairpin. Takes bulges and loops into account.
         """
@@ -53,6 +53,9 @@ class ForgiTools(object):
                 "h": lambda x: x/np.pi,
                 "m": lambda x: 0 if x < 3 else x/np.pi
         }
+        if custom_factors is not None:
+            factors.update(custom_factors)
+
         elems = [['s', 0]]      #init list with first element (type, length)
 
         step = -1 if end < start else 1

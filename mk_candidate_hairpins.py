@@ -28,7 +28,7 @@ class MirnaController(object):
         "hairpin_offset" : 40,
         #nucleotides beyond the cleavage site in the CandidateHairpins
         "additional_nts" : 20,
-        "n_subopt": 10,
+        "n_subopt": 500,
         "threads" : 3
     }
 

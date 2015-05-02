@@ -528,7 +528,7 @@ class CandidateHairpin(Hairpin):
     """
 
     ARGS = {
-        "n_subopt"       : 10,  #number of suboptimal structures to draw
+        "n_subopt"       : 500,  #number of suboptimal structures to draw
         "additional_nts" : 20,   # #nucleotides beyond the CS
         "hairpin_offset" : 10           # distance from CS + this value
     }

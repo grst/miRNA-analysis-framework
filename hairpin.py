@@ -208,6 +208,10 @@ class AnnotatedHairpin(Hairpin):
         if keyword not in self._annotation:
             self._annotation.append(keyword)
 
+    def has_annotation(self, keyword):
+        """ check if this haripin has a certain annotation"""
+        return keyword in self._annotation
+
     def remove_annotation(self, keyword):
         """ remove an annotation keyword. If keyword
         is not in annotation list, do nothing.
@@ -275,9 +279,11 @@ class ExpressedHairpin(AnnotatedHairpin):
 
     DEFAULT_ARGS = {
             "method" : "annotated",
-            "prec_window" : 7,
+            "prec_window" : 5,
             "strict" : True,
-            "cs_offset_window" : 10
+            "cs_offset_window" : 4,
+            "prec_threshold_low" : 1e1,
+            "prec_threshold_high" : 1e2
     }
 
     def __init__(self, annotated_hairpin, start_bucket, end_bucket, **kwargs):
@@ -366,7 +372,8 @@ class ExpressedHairpin(AnnotatedHairpin):
         for prec_class in HairpinPrecisionMeasures.PREC_CLASSES:
             self.remove_annotation(prec_class)
 
-        self.add_annotation(prec_maker.binary_classifier())
+        self.add_annotation(prec_maker.binary_classifier(self.args["prec_threshold_low"],
+            self.args["prec_threshold_high"]))
 
     @property
     def cleavage_sites(self):
@@ -475,19 +482,23 @@ class HairpinPrecisionMeasures(object):
         else:
             return float(max_peak)/window_sum
 
-    def binary_classifier(self):
+    def binary_classifier(self, lt = 1e1, ut = 1e2):
         """two-class-classifier: every miRNA with one single peak
         higher than 1e2 than all others is declared as precise.
         Everything within 1e1 as unprecise. The values between
         remain unclassified to have a higher difference
+
+        Args:
+            lt: lower threshold, everything below this ration is 'imprecise'
+            ut: upper threshold, everything above this ratio is 'precise'
         """
         prec_class = "unclassified"
         tmp_window = self.window[:]
         peak1 = self._pop_peak(tmp_window)
         peak2 = self._pop_peak(tmp_window)
-        if(peak1 > 1e2 * peak2):
+        if(peak1 > ut * peak2):
             prec_class = "precise"
-        elif(peak1 < 1e1 * peak2):
+        elif(peak1 < lt * peak2):
             prec_class = "isomir"
         return prec_class
 

@@ -282,8 +282,8 @@ class ExpressedHairpin(AnnotatedHairpin):
             "prec_window" : 5,
             "strict" : True,
             "cs_offset_window" : 4,
-            "prec_threshold_low" : 1e1,
-            "prec_threshold_high" : 1e2
+            "prec_threshold_mature": (8, 139), #lower and upper threshold
+            "prec_threshold_mor": (11, 60)
     }
 
     def __init__(self, annotated_hairpin, start_bucket, end_bucket, **kwargs):
@@ -372,8 +372,12 @@ class ExpressedHairpin(AnnotatedHairpin):
         for prec_class in HairpinPrecisionMeasures.PREC_CLASSES:
             self.remove_annotation(prec_class)
 
-        self.add_annotation(prec_maker.binary_classifier(self.args["prec_threshold_low"],
-            self.args["prec_threshold_high"]))
+        if method == "mor":
+            thres = self.args["prec_threshold_mor"]
+        else:
+            thres = self.args["prec_threshold_mature"]
+
+        self.add_annotation(prec_maker.binary_classifier(thres[0], thres[1]))
 
     @property
     def cleavage_sites(self):

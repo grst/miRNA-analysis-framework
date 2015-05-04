@@ -1,3 +1,3 @@
-RNAFOLD_BIN = ""
-TMP = "/home/sturm/repos/uni/ba-thesis/results/candidate-hairpins/"
-PYTHON = "/home/sturm/bin/anaconda/bin/python"
+RNAFOLD_BIN = "/home/st/sturmg/bin/ViennaRNA/bin/"
+TMP = "/mnt/raid8/biocluster/tmp/sturmg/"
+PYTHON = "/home/st/sturmg/bin/anaconda/bin/python"

@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+config.py
 *.py[cod]
 
 # C extensions
@@ -53,4 +54,3 @@ docs/_build/
 # PyBuilder
 target/
 
-config.py

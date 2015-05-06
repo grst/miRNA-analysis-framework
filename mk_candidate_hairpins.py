@@ -126,7 +126,7 @@ class MirnaController(object):
             print cand.loop_coords
 
 
-        self.candidates = filtered_candidates
+##        self.candidates = filtered_candidates
 
 
 

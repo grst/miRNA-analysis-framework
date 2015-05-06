@@ -5,7 +5,7 @@ import argparse
 from read_results import *
 import os
 from subprocess import call
-from config import TMP
+from config import TMP, PYTHON
 
 def main(fasta, subfolder):
     dir = TMP + subfolder + "/"
@@ -19,7 +19,7 @@ def main(fasta, subfolder):
             "-cwd",
             "-e", "{0}{1}.err".format(dir, name),
             "-o", "{0}{1}.out".format(dir, name),
-            "/home/st/sturmg/bin/anaconda/bin/python {0}/mk_candidates.py --name {1} --sequence {2} --output {3}{4}.pickle".format(scriptdir, name, seq, dir, name)]
+            "{5} {0}/mk_candidate_hairpins.py --name {1} --sequence {2} --output {3}{4}.pickle".format(scriptdir, name, seq, dir, name, PYTHON)]
         print " ".join(command)
         call(command)
 

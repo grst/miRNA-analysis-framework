@@ -51,7 +51,7 @@ class ForgiTools(object):
                 "f": lambda x: x,
                 "t": lambda x: x,
                 "s": lambda x: x,
-                "i": lambda x: x * (11/4.),
+                "i": lambda x: x * (4/11.),
                 "h": lambda x: x/2.,
                 "m": lambda x: x
         }

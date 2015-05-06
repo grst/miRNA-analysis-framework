@@ -23,7 +23,7 @@ class MirnaVisualizer:
             "col_3p_shade" : COL[0],
             "hist_alpha" : .7,
             "shade_alpha" : .7,
-            "figsize"   : (18, 4),
+            "figsize"   : (10, 3),
             "xtick_fontsize"    : 8
     }
 

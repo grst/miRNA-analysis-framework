@@ -44,14 +44,16 @@ class ForgiTools(object):
     def modified_distance(self, start, end, custom_factors = None):
         """ heuristic for a molecular distance between two nucleotides
         in a hairpin. Takes bulges and loops into account.
+        The given factors are fitted to minimize the relative standard
+        deviation (RSD).
         """
         factors = {
                 "f": lambda x: x,
                 "t": lambda x: x,
                 "s": lambda x: x,
-                "i": lambda x: x/float(2),
-                "h": lambda x: x/np.pi,
-                "m": lambda x: 0 if x < 3 else x/np.pi
+                "i": lambda x: x * (11/4.),
+                "h": lambda x: x/2.,
+                "m": lambda x: x
         }
         if custom_factors is not None:
             factors.update(custom_factors)

@@ -486,7 +486,7 @@ class HairpinPrecisionMeasures(object):
         else:
             return float(max_peak)/window_sum
 
-    def binary_classifier(self, lt = 1e1, ut = 1e2):
+    def binary_classifier(self, lt = 5, ut = 1e2):
         """two-class-classifier: every miRNA with one single peak
         higher than 1e2 than all others is declared as precise.
         Everything within 1e1 as unprecise. The values between

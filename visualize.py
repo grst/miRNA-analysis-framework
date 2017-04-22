@@ -11,6 +11,7 @@ from ml_tools import *
 #COL = ["#e0f3db", "#a8ddb5", "#43a2ca"]
 COL5 = ["#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac"]
 COL = [COL5[0], COL5[1], COL5[3]]
+COL_BLUE = ["#858db7", "#233888", "#aeadad"]
 
 class MirnaVisualizer:
     """ create bar chart of cleavage site expression values """
